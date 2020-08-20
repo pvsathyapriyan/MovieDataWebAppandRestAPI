@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{%block title%}
+<head>
+  <title> Edit Rows </title>
+</head>
+{%endblock title%}
+{% block content %}
+
+<style>
+	input 
+	{
+    border: 0;
+	}
+</style>
+
+<form action="{% url 'displayrows' %}" method="post">
+{% csrf_token %}
+{% for movies in rows %}
+<li>
+	Id :<input type="text" name="movieid" value='{{ movies.id }}' readonly style="margin-top:10px";>
+</li>
+<li>{{ movies.moviename }}</li>
+<li>Category ID: {{ movies.category_id }}</li>
+<li>Current Rating: {{movies.rating}}</li>
+<li>New Rating:
+ <div class="form-group col-md-10">
+      <select id="rating" class="form-control" name="newrating">
+		<option selected>None</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+	  </select>
+ </div>
+</li>
+{% endfor %}
+  <div>	  
+  <button type="submit" class="btn btn-primary">Submit Edit</button>
+  </div>
+ </div>  
+ </form>
+ <a href="{% url 'home' %}">
+	<button type="button" class="btn btn-primary" style="margin-top:10px">Back to Home </button>
+ </a>
+
+
+{% endblock %}

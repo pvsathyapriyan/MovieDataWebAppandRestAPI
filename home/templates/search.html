@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'editrows' %}" method="post">
+{% csrf_token %}
+  <ul>
+  	{% if object_list %}
+	  {% for movies in object_list %}
+	    <li>
+	    <input type="checkbox" name="editvalue" value="{{ movies.id }}">
+	      {{ movies.moviename }}, {{ movies.category }}, {{ movies.rating }}
+	    </li>
+	  {% endfor %}
+	{% else %}
+	   <p> No Matches </p>
+	{% endif %}
+  </ul>
+<button type="submit" class="btn btn-primary">Edit Selected Rows</button>
+</form>
+{% endblock %}

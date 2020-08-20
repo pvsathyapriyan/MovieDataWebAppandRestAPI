@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{%block title%}
+<head>
+  <title> Edited Results </title>
+</head>
+{%endblock title%}
+{% block content %}
+  <ul>
+  {% for movies in rows %}
+    <li>
+      Movie Name: {{ movies.moviename }}
+    </li>
+    <li>
+     {{ movies.rating }}
+    </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'home' %}">
+	<button type="button" class="btn btn-primary" style="margin-top:10px">Back to Home </button>
+ </a>
+{% endblock %}

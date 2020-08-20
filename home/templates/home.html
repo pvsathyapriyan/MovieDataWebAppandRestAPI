@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{%block title%}
+<head>
+  <title> Home Page </title>
+</head>
+{%endblock title%}
+{% block content %}
+
+<div class="form-group col ">
+	<form action="{% url 'filterresults' %}" method="get">
+  <input class='form-control' name="searchterm" type="text" placeholder="Search..." style="margin-top:10px" >
+
+	<label for="category" style="margin-top:10px">Category</label>
+	<select id="category" class="form-control" name="filtercategory" >
+		<option selected>None</option>
+			{% for category in object_list %}
+				<option>{{ category.category }}</option>
+			{% endfor %}
+	</select>
+	<label for="rating" style="margin-top:10px">Rating</label>
+	<select id="rating" class="form-control" name="filterrating">
+		<option selected>None</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+	</select>
+
+<button type="submit" class="btn btn-primary" style="margin-top:10px">Apply Filter</button>
+</form>
+</div>
+
+
+{% endblock %}

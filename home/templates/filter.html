@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{%block title%}
+<head>
+  <title> Search Results </title>
+</head>
+{%endblock title%}
+{% block content %}
+<form action="{% url 'editrows' %}" method="post">
+{% csrf_token %}
+  <ul>
+  {% if object_list %}
+	  {% for movies in object_list %}
+	    <li>
+	    <input type="checkbox" name="editvalue" value="{{ movies.id }}">
+	      {{ movies.moviename }}, {{ movies.category }}, {{ movies.rating }}
+	    </li>
+	  {% endfor %}
+	{% else %}
+	   <p> No Matches </p>
+	{% endif %}
+	<button type="submit" class="btn btn-primary">Edit Selected Rows</button>
+   </ul>
+</form>
+	<a href="{% url 'home' %}">
+		<button type="button" class="btn btn-primary" style="margin-top:10px">Back to Home </button>
+	</a>
+<form action="{% url 'exportxl' %}" method="post">
+{% csrf_token %}
+	{% for movies in object_list %}
+			<input type="hidden" name="editvalue" value="{{ movies.id }}">
+	{% endfor %}
+		<button type="submit" class="btn btn-primary" style="margin-top:10px">Export to Excel</button>
+</form>
+	
+
+{% endblock %}
